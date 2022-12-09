@@ -74,20 +74,22 @@ function cumleKur(birinci, ikinci="", ucuncu="", dorduncu="", besinci=""){
 }
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 1 parametre göndererek "Hello World!" stringini elde edin, sonucu konsolde gözlemleyin */
-
+console.log(cumleKur("Hello World!"));
 
 
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 2 parametre göndererek "Hello World!" stringini elde edin, sonucu konsolde gözlemleyin */
-
+console.log(cumleKur("Hello", " World!"));
 
 
 
 /* (Oto test var) cumleKur fonksiyonuna 5 parametre göndererek "Ben iyi bir yazılımcı olacağım!" stringini elde edin, sonucu `bircumle` değişkenine atayın ve konsolde gözlemleyin */
 var bircumle;
 
-/* kodlar buraya */
 
+/* kodlar buraya */
+bircumle = cumleKur("Ben", " iyi", " bir", " yazılımcı", " olacağım!");
+console.log(bircumle);
 
 
 //		Sayfanın en üstünde global olarak tanımlanmış `cumleler` adında bir dizi bulunmaktadır. Bu dizinin içinde en çok 5 en az 1 adet string bulunan diziler bulunmaktadır. Aşağıdaki görevlerde aksi belirtilmedikçe bu dizi kullanılacaktır.
@@ -104,10 +106,15 @@ var bircumle;
 	*/
 	
 
-function cumlelereDonustur(/* kodlar buraya */ ){
-	/* kodlar buraya */
-}
+function cumlelereDonustur(dizi, ayrac=","){
+	let yeniDizi = [];
+	let yeniCumle = dizi.map((cumle)=>{
+		yeniDizi.push(cumle.join(ayrac));
+	});
+	return yeniDizi;
+};
 
+console.log(cumlelereDonustur(cumleler, " "));
 
 
 /* GÖREV 2:
@@ -120,10 +127,12 @@ function cumlelereDonustur(/* kodlar buraya */ ){
 			6. Oluşturulan paragraf döndürülecek
 	*/
 	
-function paragrafOlustur(/* kodlar buraya */ ){
-	/* kodlar buraya */ 
-}
-
+function paragrafOlustur(dizi, callbackCumleKur, callbackCumlelereDonustur){
+	let yeniDizi = callbackCumlelereDonustur(dizi, " ");
+	let yeniParagraf = callbackCumleKur(yeniDizi[1], yeniDizi[3], yeniDizi[5], yeniDizi[7], yeniDizi[9]);
+	return yeniParagraf;
+};
+console.log(paragrafOlustur(cumleler, cumleKur, cumlelereDonustur));
 
 /* 	GÖREV 3:
 		Yukarıda isimleri sebzeler ve meyveler olan 2 dizi bulunmaktadır. Bu dizileri kullanarak aşağıdaki görevleri tamamlayın.
@@ -132,8 +141,8 @@ function paragrafOlustur(/* kodlar buraya */ ){
 //3a çözümü
 /* kodlar buraya */
 
-
-
+meyveler.pop();
+meyveler.shift();
 
 
  
@@ -142,11 +151,11 @@ function paragrafOlustur(/* kodlar buraya */ ){
 //3b çözümü
 /* kodlar buraya */
 
+const tavsan = '🐇';
+const kirpi = '🦔';
 
-
-
-
-
+sebzeler.unshift(tavsan);
+sebzeler.push(kirpi);
 
 
 /* 			3c. manav isminde bir dizi oluşturun.`meyveler` dizisi ilk elemanlara, `sebzeler` dizisi son elemanlara denk gelecek şekilde, iki diziyi birleştirip sonucu manav dizisine aktarın. (.concat metodu)
@@ -155,8 +164,10 @@ function paragrafOlustur(/* kodlar buraya */ ){
 /* kodlar buraya */
 
 var manav;
+manav = [];
 
-
+manav = meyveler.concat(sebzeler);
+console.log(manav);
 
 
 
@@ -170,10 +181,14 @@ var manav;
 			4. elde edilen string döndürülecek
  */
 
-function emojileriDonustur(/* kodlar buraya */){
-/* kodlar buraya */
-
-}
+function emojileriDonustur(mesaj, emojilerObje){
+	for (let key in emojilerObje){
+		mesaj = mesaj.replace(key.toUpperCase(), key);
+		mesaj = mesaj.replace(key, emojilerObje[key]);
+	};
+	return mesaj;
+};
+console.log(emojileriDonustur("Selam :) Nasılsın :D Bugünkü olay çok komikti :P ama sonra çok şaşırdık :o biraz da üzüldük :( ama yine de seviliyorsun <3", emojiler));
 
 
 
